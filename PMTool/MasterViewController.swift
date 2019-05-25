@@ -68,10 +68,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         
         if segue.identifier == "updateDetails" {
+         //   if segue.destination is UpdateProjectViewController
             if let indexPath = tableView.indexPathForSelectedRow {
                 let object = fetchedResultsController.object(at: indexPath)
                
-                let updateController = (segue.destination as! UINavigationController).topViewController as! UpdateProjectViewController
+                let updateController = (segue.destination as! UpdateProjectViewController)
+                   // let control = updateController.topViewController as! UpdateProjectViewController
                 updateController.detailItems = object
                 print("Update\(object)")
                 

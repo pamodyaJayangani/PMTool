@@ -11,23 +11,6 @@ import CoreData
 
 class UpdateProjectViewController: UIViewController {
     
-    
-    func updateView(){
-        
-        if let detail = detailItems {
-            print("======\(detail.projectName)")
-            txtProjectName.text = detail.projectName
-        }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("-------")
-updateView()
-        // Do any additional setup after loading the view.
-    }
-    
-    
     @IBOutlet weak var txtProjectName: UITextField!
     
     @IBOutlet weak var txtProjectNotes: UITextField!
@@ -38,12 +21,55 @@ updateView()
     
     @IBOutlet weak var addToCalendar: UISwitch!
     
+    func updateView(){
+        if let detail = detailItems {
+            if let label = txtProjectName{
+                label.text = detail.projectName!
+            }
+            if let note = txtProjectNotes{
+                note.text = detail.projectNote!
+            }
+            if let date = dueDate{
+                let dateFormatterPrint = DateFormatter()
+                dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+                
+                let projectDate: NSDate? = dateFormatterPrint.date(from: "May 25 2019") as! NSDate
+
+                date.date = projectDate as! Date
+            }
+            if let projectPiority = priority{
+                var status = detail.priority
+                switch status {
+                case "Medium":
+                    projectPiority.isEnabledForSegment(at: 1)
+                case "High":
+                    projectPiority.isEnabledForSegment(at: 2)
+                
+                default:
+                    projectPiority.isEnabledForSegment(at: 0)
+                }
+                
+            }
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateView()
+        // Do any additional setup after loading the view.
+    }
+    
+    
+   
+    
     var  detailItems: Projects? {
         didSet {
             // Update the view.
             updateView()
         }
     }
+    
+    
     
     
     

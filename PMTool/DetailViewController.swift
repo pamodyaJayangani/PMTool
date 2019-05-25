@@ -18,17 +18,26 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var projectNote: UILabel!
     
     @IBOutlet weak var lblPriority: UILabel!
+    
+    var projectName: String = ""
+    var prNote: String = ""
+    var projectPriority: String = ""
+    var date: String = ""
+    
     func configureView() {
         // Update the user interface for the detail item.
         if let detail = detailItem {
             if let label = detailDescriptionLabel {
                 label.text = detail.projectName!.description
+                projectName = detail.projectName!.description
             }
             if let note = projectNote{
                 note.text = detail.projectNote
+                prNote = detail.projectNote!
             }
             if let priority = lblPriority{
                 priority.text = detail.priority
+                projectPriority = detail.priority!
             }
         }
     }
