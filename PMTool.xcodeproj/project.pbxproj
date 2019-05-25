@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9605BE412299974E00740603 /* UpdateTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9605BE402299974E00740603 /* UpdateTaskViewController.swift */; };
+		960D8C4C2299DA4F00867A9B /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960D8C4B2299DA4F00867A9B /* EventKit.framework */; };
 		960EBDCB2299059700264A0C /* UpdateProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EBDCA2299059700264A0C /* UpdateProjectViewController.swift */; };
 		960EE6F42294FBA5009FF884 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EE6F32294FBA5009FF884 /* AppDelegate.swift */; };
 		960EE6F72294FBA5009FF884 /* PMTool.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 960EE6F52294FBA5009FF884 /* PMTool.xcdatamodeld */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9605BE402299974E00740603 /* UpdateTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskViewController.swift; sourceTree = "<group>"; };
+		960D8C4B2299DA4F00867A9B /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		960EBDCA2299059700264A0C /* UpdateProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProjectViewController.swift; sourceTree = "<group>"; };
 		960EE6F02294FBA5009FF884 /* PMTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PMTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		960EE6F32294FBA5009FF884 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,17 +43,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				960D8C4C2299DA4F00867A9B /* EventKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		960D8C4A2299DA4C00867A9B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				960D8C4B2299DA4F00867A9B /* EventKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		960EE6E72294FBA5009FF884 = {
 			isa = PBXGroup;
 			children = (
 				960EE6F22294FBA5009FF884 /* PMTool */,
 				960EE6F12294FBA5009FF884 /* Products */,
+				960D8C4A2299DA4C00867A9B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +89,7 @@
 				9643323E229854660051B976 /* ProjectDetailsViewController.swift */,
 				9643324022986B720051B976 /* TaskDetailsViewController.swift */,
 				960EBDCA2299059700264A0C /* UpdateProjectViewController.swift */,
+				9605BE402299974E00740603 /* UpdateTaskViewController.swift */,
 			);
 			path = PMTool;
 			sourceTree = "<group>";
@@ -156,6 +171,7 @@
 				960EE6F92294FBA5009FF884 /* MasterViewController.swift in Sources */,
 				960EE6FB2294FBA5009FF884 /* DetailViewController.swift in Sources */,
 				9643324122986B720051B976 /* TaskDetailsViewController.swift in Sources */,
+				9605BE412299974E00740603 /* UpdateTaskViewController.swift in Sources */,
 				9643323F229854660051B976 /* ProjectDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

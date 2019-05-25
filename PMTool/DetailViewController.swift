@@ -128,6 +128,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             updateController?.tNote = tNote
             updateController?.date = date
             updateController?.taskPriority = taskPriority
+            updateController?.projectName = projectName
             
             //print("Update\(arr[indexPath.row])")
 
@@ -185,17 +186,56 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         return cell
     }
+ 
+    // Override to support editing the table view.
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+            arr.remove(at: indexPath.row)
+            tableView.reloadData()
+            
+            // Delete the row from the data source
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            
+            //We need to create a context from this container
+            let managedContext = appDelegate.persistentContainer.viewContext
+            
+           
+//            getData(forRowAt: indexPath)
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
+            fetchRequest.predicate = NSPredicate(format: "taskName = %@", taskName)
+            fetchRequest.predicate = NSPredicate(format: "projectName = %@", projectName)
+            
+            
+            do
+            {
+                let tasks = try managedContext.fetch(fetchRequest)
+                
+                let objectToDelete = tasks[indexPath.row] as! NSManagedObject
+                managedContext.delete(objectToDelete)
+                
+                do{
+                    try managedContext.save()
+                }
+                catch
+                {
+                    print(error)
+                }
+                
+            }
+            catch
+            {
+                print(error)
+            }
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
     
-//      func prepare(for segue: UIStoryboardSegue, sender: Any?,cellForRowAt indexPath: IndexPath) {
-////        print("------")
-////        if segue.destination is UpdateTaskViewController{
-////       // if segue.identifier == "UpdateTask" {
-////            let updateController = (segue.destination as! UpdateTaskViewController)
-////            updateController.detailTask = arr[indexPath.row]
-////            print("Update\(arr[indexPath.row])")
-////
-//        }
-//    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
     
     
