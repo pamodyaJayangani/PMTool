@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		960EBDCB2299059700264A0C /* UpdateProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EBDCA2299059700264A0C /* UpdateProjectViewController.swift */; };
 		960EE6F42294FBA5009FF884 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EE6F32294FBA5009FF884 /* AppDelegate.swift */; };
 		960EE6F72294FBA5009FF884 /* PMTool.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 960EE6F52294FBA5009FF884 /* PMTool.xcdatamodeld */; };
 		960EE6F92294FBA5009FF884 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EE6F82294FBA5009FF884 /* MasterViewController.swift */; };
@@ -14,9 +15,12 @@
 		960EE6FE2294FBA5009FF884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 960EE6FC2294FBA5009FF884 /* Main.storyboard */; };
 		960EE7002294FBA7009FF884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 960EE6FF2294FBA7009FF884 /* Assets.xcassets */; };
 		960EE7032294FBA7009FF884 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 960EE7012294FBA7009FF884 /* LaunchScreen.storyboard */; };
+		9643323F229854660051B976 /* ProjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9643323E229854660051B976 /* ProjectDetailsViewController.swift */; };
+		9643324122986B720051B976 /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9643324022986B720051B976 /* TaskDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		960EBDCA2299059700264A0C /* UpdateProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProjectViewController.swift; sourceTree = "<group>"; };
 		960EE6F02294FBA5009FF884 /* PMTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PMTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		960EE6F32294FBA5009FF884 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		960EE6F62294FBA5009FF884 /* PMTool.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PMTool.xcdatamodel; sourceTree = "<group>"; };
@@ -26,6 +30,8 @@
 		960EE6FF2294FBA7009FF884 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		960EE7022294FBA7009FF884 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		960EE7042294FBA7009FF884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9643323E229854660051B976 /* ProjectDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsViewController.swift; sourceTree = "<group>"; };
+		9643324022986B720051B976 /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,9 @@
 				960EE7012294FBA7009FF884 /* LaunchScreen.storyboard */,
 				960EE7042294FBA7009FF884 /* Info.plist */,
 				960EE6F52294FBA5009FF884 /* PMTool.xcdatamodeld */,
+				9643323E229854660051B976 /* ProjectDetailsViewController.swift */,
+				9643324022986B720051B976 /* TaskDetailsViewController.swift */,
+				960EBDCA2299059700264A0C /* UpdateProjectViewController.swift */,
 			);
 			path = PMTool;
 			sourceTree = "<group>";
@@ -141,10 +150,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				960EBDCB2299059700264A0C /* UpdateProjectViewController.swift in Sources */,
 				960EE6F72294FBA5009FF884 /* PMTool.xcdatamodeld in Sources */,
 				960EE6F42294FBA5009FF884 /* AppDelegate.swift in Sources */,
 				960EE6F92294FBA5009FF884 /* MasterViewController.swift in Sources */,
 				960EE6FB2294FBA5009FF884 /* DetailViewController.swift in Sources */,
+				9643324122986B720051B976 /* TaskDetailsViewController.swift in Sources */,
+				9643323F229854660051B976 /* ProjectDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

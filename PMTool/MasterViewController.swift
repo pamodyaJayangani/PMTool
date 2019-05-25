@@ -20,8 +20,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = editButtonItem
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+//        navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -35,21 +35,21 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     @objc
     func insertNewObject(_ sender: Any) {
-        let context = self.fetchedResultsController.managedObjectContext
-        let newEvent = Event(context: context)
-             
-        // If appropriate, configure the new managed object.
-        newEvent.timestamp = Date()
-
-        // Save the context.
-        do {
-            try context.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
+//        let context = self.fetchedResultsController.managedObjectContext
+//        let newEvent = Projects(context: context)
+//
+//        // If appropriate, configure the new managed object.
+//        newEvent.projectName = "Date()"
+//
+//        // Save the context.
+//        do {
+//            try context.save()
+//        } catch {
+//            // Replace this implementation with code to handle the error appropriately.
+//            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            let nserror = error as NSError
+//            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+   //     }
     }
 
     // MARK: - Segues
@@ -60,11 +60,41 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let object = fetchedResultsController.object(at: indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = object
+                
+                print("Prepare \(object)")
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
+        
+        if segue.identifier == "updateDetails" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let object = fetchedResultsController.object(at: indexPath)
+               
+                let updateController = (segue.destination as! UINavigationController).topViewController as! UpdateProjectViewController
+                updateController.detailItems = object
+                print("Update\(object)")
+                
+                updateController.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                updateController.navigationItem.leftItemsSupplementBackButton = true
+            }
+        }
     }
+    
+    
+//     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "showDetail" {
+//            if let indexPath = tableView.indexPathForSelectedRow {
+//                let object = fetchedResultsController.object(at: indexPath)
+//                let controller = (segue.destination as! UINavigationController).topViewController as! UpdateProjectViewController
+//                controller.detailItems = object
+//                print("Update\(object)")
+//                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+//                controller.navigationItem.leftItemsSupplementBackButton = true
+//            }
+//        }
+//    }
+//
 
     // MARK: - Table View
 
@@ -103,26 +133,40 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+//        if editingStyle == .insert {
+//            let context = fetchedResultsController.managedObjectContext
+//            context.insert(fetchedResultsController.object(at: indexPath))
+//
+//            do {
+//                try context.save()
+//            } catch {
+//                // Replace this implementation with code to handle the error appropriately.
+//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                let nserror = error as NSError
+//                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+//            }
+//        }
     }
 
-    func configureCell(_ cell: UITableViewCell, withEvent event: Event) {
-        cell.textLabel!.text = event.timestamp!.description
+    func configureCell(_ cell: UITableViewCell, withEvent event: Projects) {
+        cell.textLabel!.text = event.projectName!.description
     }
 
     // MARK: - Fetched results controller
 
-    var fetchedResultsController: NSFetchedResultsController<Event> {
+    var fetchedResultsController: NSFetchedResultsController<Projects> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
         
-        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        let fetchRequest: NSFetchRequest<Projects> = Projects.fetchRequest()
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
+
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "projectName", ascending: false)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         
@@ -143,7 +187,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         return _fetchedResultsController!
     }    
-    var _fetchedResultsController: NSFetchedResultsController<Event>? = nil
+    var _fetchedResultsController: NSFetchedResultsController<Projects>? = nil
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
@@ -155,6 +199,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
             case .delete:
                 tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+//            case .update:
+//                tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+            
             default:
                 return
         }
@@ -167,9 +214,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Event)
+                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Projects)
+                tableView.deleteRows(at: [indexPath!], with: .fade)
+                tableView.insertRows(at: [newIndexPath!], with: .fade)
+            
             case .move:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Event)
+                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Projects)
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
         }
     }
