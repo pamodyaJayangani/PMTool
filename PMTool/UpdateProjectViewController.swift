@@ -33,7 +33,7 @@ class UpdateProjectViewController: UIViewController {
                 let dateFormatterPrint = DateFormatter()
                 dateFormatterPrint.dateFormat = "MMM dd,yyyy"
                 
-                let projectDate: NSDate? = dateFormatterPrint.date(from: "May 25 2019") as! NSDate
+                let projectDate: NSDate? = dateFormatterPrint.date(from: "May 24 2019") as! NSDate
 
                 date.date = projectDate as! Date
             }
@@ -41,12 +41,12 @@ class UpdateProjectViewController: UIViewController {
                 var status = detail.priority
                 switch status {
                 case "Medium":
-                    projectPiority.isEnabledForSegment(at: 1)
+                    projectPiority.selectedSegmentIndex = 1
                 case "High":
-                    projectPiority.isEnabledForSegment(at: 2)
-                
+                    projectPiority.selectedSegmentIndex = 2
+                    
                 default:
-                    projectPiority.isEnabledForSegment(at: 0)
+                    projectPiority.selectedSegmentIndex = 3
                 }
                 
             }
@@ -60,8 +60,6 @@ class UpdateProjectViewController: UIViewController {
     }
     
     
-   
-    
     var  detailItems: Projects? {
         didSet {
             // Update the view.
@@ -70,9 +68,49 @@ class UpdateProjectViewController: UIViewController {
     }
     
     
-    
-    
-    
     @IBAction func updateProject(_ sender: Any) {
+        
+        /*Read data from fields*/
+        
+        var status = priority.selectedSegmentIndex
+        var projectPriority = ""
+        
+        switch status {
+        case 0:
+            projectPriority = "Low"
+        case 1:
+            projectPriority = "Medium"
+        case 2:
+            projectPriority = "High"
+        default:
+            projectPriority = "Low"
+        }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest : NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Projects")
+        fetchRequest.predicate = NSPredicate(format: "projectName = %@", (detailItems?.projectName!)!)
+
+        do
+        {
+            let test = try managedContext.fetch(fetchRequest)
+            
+            let objectUpdate = test[0] as! NSManagedObject
+            objectUpdate.setValue(txtProjectName.text, forKey: "projectName")
+            objectUpdate.setValue(txtProjectNotes.text, forKey: "projectNote")
+            objectUpdate.setValue(projectPriority, forKey: "priority")
+            objectUpdate.setValue(String(dueDate.date.description), forKey: "dueDate")
+            do{
+                try managedContext.save()
+            }
+            catch
+            {
+                print(error)
+            }
+        }
+        catch
+        {
+            print(error)
+        }
+        dismiss(animated: true)
     }
 }

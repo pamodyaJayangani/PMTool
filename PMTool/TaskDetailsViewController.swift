@@ -27,11 +27,14 @@ class TaskDetailsViewController: UIViewController {
     
     @IBOutlet weak var addToCalendar: UISwitch!
     
+    var projectName = ""
+    
     @IBAction func saveTasks(_ sender: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let newTask = Tasks(context: context)
         
+        newTask.projectName = projectName
         var status = priority.selectedSegmentIndex
         switch status {
         case 0:
