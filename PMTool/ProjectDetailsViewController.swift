@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EventKit
 
 class ProjectDetailsViewController: UIViewController {
 
@@ -25,6 +26,9 @@ class ProjectDetailsViewController: UIViewController {
     @IBOutlet weak var priority: UISegmentedControl!
     
     @IBOutlet weak var addToCalendar: UISwitch!
+    
+    let store = EKEventStore()
+    
     /*
      // MARK: - Navigation
 
@@ -52,11 +56,13 @@ class ProjectDetailsViewController: UIViewController {
             newProject.priority = "Low"
         }
         
-        
+
         newProject.projectName = txtProjectName.text
         newProject.projectNote = txtProjectNotes.text
-        if addToCalendar.isSelected{
-            newProject.dueDate = String(dueDate.date.description)
+        newProject.dueDateNew = dueDate.date
+        
+        if addToCalendar.isOn{
+             createEventinTheCalendar(with: txtProjectName.text!, forDate: dueDate.date, toDate: dueDate.date)
         }
         //Save the context.
         do{
@@ -67,6 +73,35 @@ class ProjectDetailsViewController: UIViewController {
             fatalError("Unresolved error \(nserror), \(nserror)")
         }
         dismiss(animated: true)
+    }
+    
+    func createEventinTheCalendar(with title:String, forDate eventStartDate:Date, toDate eventEndDate:Date) {
+        print(title)
+        print(eventStartDate)
+        print(eventEndDate)
+        store.requestAccess(to: .event) { (success, error) in
+            if  error == nil {
+                let event = EKEvent.init(eventStore: self.store)
+                event.title = title
+                event.calendar = self.store.defaultCalendarForNewEvents // this will return deafult calendar from device calendars
+                event.startDate = eventStartDate
+                event.endDate = eventEndDate
+                
+                let alarm = EKAlarm.init(absoluteDate: Date.init(timeInterval: -3600, since: event.startDate))
+                event.addAlarm(alarm)
+                
+                do {
+                    try self.store.save(event, span: .thisEvent)
+                    //event created successfullt to default calendar
+                } catch let error as NSError {
+                    print("failed to save event with error : \(error)")
+                }
+                
+            } else {
+                //we have error in getting access to device calnedar
+                print("error = \(String(describing: error?.localizedDescription))")
+            }
+        }
     }
     
     

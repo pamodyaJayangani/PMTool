@@ -52,19 +52,19 @@ class UpdateTaskViewController: UIViewController {
  
 
 
-            if let projectPiority = priority{
-                var status = taskPriority
-               switch status {
-                case "Medium":
-                    projectPiority.selectedSegmentIndex = 1
-                case "High":
-                    projectPiority.selectedSegmentIndex = 2
-                    
-                default:
-                    projectPiority.selectedSegmentIndex = 0
-                }
-                
-            }
+//            if let projectPiority = priority{
+//                var status = taskPriority
+//               switch status {
+//                case "Medium":
+//                    projectPiority.selectedSegmentIndex = 1
+//                case "High":
+//                    projectPiority.selectedSegmentIndex = 2
+//
+//                default:
+//                    projectPiority.selectedSegmentIndex = 0
+//                }
+//
+//            }
         }
     
 
@@ -72,19 +72,19 @@ class UpdateTaskViewController: UIViewController {
     @IBAction func updateTask(_ sender: Any) {
         /*Read data from fields*/
         
-        var status = priority.selectedSegmentIndex
-        var projectPriority = ""
-        
-        switch status {
-        case 0:
-            projectPriority = "Low"
-        case 1:
-            projectPriority = "Medium"
-        case 2:
-            projectPriority = "High"
-        default:
-            projectPriority = "Low"
-        }
+//        var status = priority.selectedSegmentIndex
+//        var projectPriority = ""
+//
+//        switch status {
+//        case 0:
+//            projectPriority = "Low"
+//        case 1:
+//            projectPriority = "Medium"
+//        case 2:
+//            projectPriority = "High"
+//        default:
+//            projectPriority = "Low"
+//        }
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest : NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Tasks")
@@ -98,8 +98,8 @@ class UpdateTaskViewController: UIViewController {
             let objectUpdate = test[0] as! NSManagedObject
             objectUpdate.setValue(txtTastName.text, forKey: "taskName")
             objectUpdate.setValue(txtTastName.text, forKey: "taskNote")
-            objectUpdate.setValue(taskPriority, forKey: "priority")
-            objectUpdate.setValue(String(dueDate.date.description), forKey: "dueDate")
+//            objectUpdate.setValue(taskPriority, forKey: "priority")
+            objectUpdate.setValue(dueDate.date, forKey: "dueDateNew")
             do{
                 try managedContext.save()
             }

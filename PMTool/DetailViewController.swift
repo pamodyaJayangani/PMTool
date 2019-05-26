@@ -139,7 +139,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         taskName = arr[indexPath.row].taskName!
         tNote = arr[indexPath.row].taskNote!
         //date = arr[indexPath.row].dueDate!
-        taskPriority = arr[indexPath.row].priority!
+//        taskPriority = arr[indexPath.row].priority!
     }
     func retrieveTaskData(){
         

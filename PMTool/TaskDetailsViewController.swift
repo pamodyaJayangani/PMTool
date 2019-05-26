@@ -35,25 +35,24 @@ class TaskDetailsViewController: UIViewController {
         let newTask = Tasks(context: context)
         
         newTask.projectName = projectName
-        var status = priority.selectedSegmentIndex
-        switch status {
-        case 0:
-            newTask.priority = "Low"
-        case 1:
-            newTask.priority = "Medium"
-        case 2:
-            newTask.priority = "High"
-        default:
-            newTask.priority = "Low"
-        }
+//        var status = priority.selectedSegmentIndex
+//        switch status {
+//        case 0:
+//            newTask.priority = "Low"
+//        case 1:
+//            newTask.priority = "Medium"
+//        case 2:
+//            newTask.priority = "High"
+//        default:
+//            newTask.priority = "Low"
+//        }
         
         
         //newTask.projectName = txtProjectName.text
         newTask.taskName = txtTaskName.text           
         newTask.taskNote = txtTaskNote.text
-        if addToCalendar.isSelected{
-            newTask.dueDate = String(dueDate.date.description)
-        }
+        newTask.dueDateNew = dueDate.date
+
         //Save the context.
         do{
             //  print("!!!!!!!!!!!!")
