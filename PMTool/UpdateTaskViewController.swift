@@ -18,11 +18,16 @@ class UpdateTaskViewController: UIViewController {
     
     @IBOutlet weak var addToCalendar: UISwitch!
     
+    @IBOutlet weak var progressSlider: UISlider!
+    
     var taskName:String = ""
     var tNote: String = ""
+    var tProgress: Double = 0.00
     var taskPriority: String = ""
     var date: String = ""
     var projectName = ""
+    var sliderProgress:Double = 0.00
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +54,12 @@ class UpdateTaskViewController: UIViewController {
             if let note = txtTaskNote{
                 note.text = tNote
             }
- 
+        
+        
+            if let progress = progressSlider {
+                progress.setValue(Float(tProgress), animated: true)
+            }
+        
 
 
 //            if let projectPiority = priority{
@@ -98,6 +108,7 @@ class UpdateTaskViewController: UIViewController {
             let objectUpdate = test[0] as! NSManagedObject
             objectUpdate.setValue(txtTastName.text, forKey: "taskName")
             objectUpdate.setValue(txtTastName.text, forKey: "taskNote")
+            objectUpdate.setValue(sliderProgress, forKey: "progress")
 //            objectUpdate.setValue(taskPriority, forKey: "priority")
             objectUpdate.setValue(dueDate.date, forKey: "dueDateNew")
             do{
@@ -117,6 +128,10 @@ class UpdateTaskViewController: UIViewController {
    }
     
     
+    @IBAction func sliderChanged(_ sender: UISlider) {
+        sliderProgress = Double(sender.value * 100).rounded()
+//        percentage.text = String(stringInterpolationSegment: taskProgress)
+        print(sliderProgress)    }
     
     /*
     // MARK: - Navigation

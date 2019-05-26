@@ -25,6 +25,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var projectName: String = ""
     var taskName:String = ""
     var tNote: String = ""
+    var tProgress:Double = 0.00
     var taskPriority: String = ""
     var date: String = ""
      let cellName:String = "Cell";
@@ -138,6 +139,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func getData(forRowAt indexPath: IndexPath){
         taskName = arr[indexPath.row].taskName!
         tNote = arr[indexPath.row].taskNote!
+        tProgress = arr[indexPath.row].progress
         //date = arr[indexPath.row].dueDate!
 //        taskPriority = arr[indexPath.row].priority!
     }

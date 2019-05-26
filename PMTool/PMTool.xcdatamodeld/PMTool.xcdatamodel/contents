@@ -11,12 +11,13 @@
         <attribute name="dueDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dueDateNew" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="priority" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="progress" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="projectName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="taskName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="taskNote" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Projects" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="Tasks" positionX="-63" positionY="9" width="128" height="135"/>
+        <element name="Tasks" positionX="-63" positionY="9" width="128" height="150"/>
     </elements>
 </model>
