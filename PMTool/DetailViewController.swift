@@ -119,7 +119,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let vc = segue.destination as? TaskDetailsViewController
             vc?.projectName = projectName
         }
-        print("------\(taskName)")
+        print("------\(projectName)")
         if segue.destination is UpdateTaskViewController{
             let index = tableView.indexPathForSelectedRow
             getData(forRowAt: index!)
@@ -139,7 +139,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func getData(forRowAt indexPath: IndexPath){
         taskName = arr[indexPath.row].taskName!
         tNote = arr[indexPath.row].taskNote!
-        tProgress = arr[indexPath.row].progress
+//        tProgress = arr[indexPath.row].progress
+//        print("get data prog\(arr[indexPath.row].progress)")
         //date = arr[indexPath.row].dueDate!
 //        taskPriority = arr[indexPath.row].priority!
     }
@@ -505,6 +506,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             
             var progress = self.fetchedResultsController.fetchedObjects?[indexPath.row].progress
+            tProgress = progress!
 
         }
         //
@@ -517,7 +519,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print(indexPath.row)
         
         cell.taskName.text = taskName
-        cell.progressLbl.text = "Progress - \(String(stringInterpolationSegment: progress!))"
+       // cell.progressLbl.text = "Progress - \(String(stringInterpolationSegment: progress!))"
+        cell.progressBar.setProgress(Float(progress!), animated: true)
         //        cell.Percentage.text = String(progress!)
 //        cell.taskNotes.text = notes
         //cell.progress.progress = Float(progress!/100)

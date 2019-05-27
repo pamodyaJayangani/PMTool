@@ -57,6 +57,7 @@ class UpdateTaskViewController: UIViewController {
         
         
             if let progress = progressSlider {
+                print("progress in update \(tProgress)")
                 progress.setValue(Float(tProgress), animated: true)
             }
         
@@ -81,20 +82,9 @@ class UpdateTaskViewController: UIViewController {
 
     @IBAction func updateTask(_ sender: Any) {
         /*Read data from fields*/
-        
-//        var status = priority.selectedSegmentIndex
-//        var projectPriority = ""
-//
-//        switch status {
-//        case 0:
-//            projectPriority = "Low"
-//        case 1:
-//            projectPriority = "Medium"
-//        case 2:
-//            projectPriority = "High"
-//        default:
-//            projectPriority = "Low"
-//        }
+        print("333333")
+        sliderChanged(progressSlider)
+
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest : NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Tasks")
@@ -109,7 +99,7 @@ class UpdateTaskViewController: UIViewController {
             objectUpdate.setValue(txtTastName.text, forKey: "taskName")
             objectUpdate.setValue(txtTastName.text, forKey: "taskNote")
             objectUpdate.setValue(sliderProgress, forKey: "progress")
-//            objectUpdate.setValue(taskPriority, forKey: "priority")
+          //  objectUpdate.setValue(taskPriority, forKey: "priority")
             objectUpdate.setValue(dueDate.date, forKey: "dueDateNew")
             do{
                 try managedContext.save()
@@ -131,7 +121,7 @@ class UpdateTaskViewController: UIViewController {
     @IBAction func sliderChanged(_ sender: UISlider) {
         sliderProgress = Double(sender.value * 100).rounded()
 //        percentage.text = String(stringInterpolationSegment: taskProgress)
-        print(sliderProgress)    }
+        print("sender.values\(sender.value)liderProgress\(sliderProgress)")    }
     
     /*
     // MARK: - Navigation
