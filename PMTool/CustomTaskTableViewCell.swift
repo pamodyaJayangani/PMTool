@@ -11,6 +11,8 @@ import UIKit
 class CustomTaskTableViewCell: UITableViewCell {
 
     @IBOutlet weak var taskName: UILabel!
+    @IBOutlet weak var taskDate: UILabel!
+    @IBOutlet weak var progressLbl: UILabel!
     
     
     override func awakeFromNib() {

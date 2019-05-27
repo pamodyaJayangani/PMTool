@@ -496,9 +496,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //        let estimatedTime = self.fetchedResultsController.fetchedObjects?[indexPath.row].estTime
         let notes = self.fetchedResultsController.fetchedObjects?[indexPath.row].taskNote
         let selectedDate = self.fetchedResultsController.fetchedObjects?[indexPath.row].dueDateNew
+        let progress = self.fetchedResultsController.fetchedObjects?[indexPath.row].progress
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = "MM-dd-yyyy"
-//        cell.taskDue.text = "Due \(dateFormatterPrint.string(from: selectedDate!))"
+        cell.taskDate.text = "Due \(dateFormatterPrint.string(from: selectedDate!))"
         
         if((self.fetchedResultsController.fetchedObjects?[indexPath.row]) != nil) {
             
@@ -516,6 +517,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print(indexPath.row)
         
         cell.taskName.text = taskName
+        cell.progressLbl.text = "Progress - \(String(stringInterpolationSegment: progress!))"
         //        cell.Percentage.text = String(progress!)
 //        cell.taskNotes.text = notes
         //cell.progress.progress = Float(progress!/100)
