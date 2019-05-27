@@ -22,6 +22,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var noOfDays: UIProgressView!
     var projectName: String = ""
     var taskName:String = ""
     var tNote: String = ""
@@ -46,7 +47,15 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if let priority = lblPriority{
                 priority.text = detail.priority
                
+                
             }
+//            if let days = noOfDays{
+//                let currentDate = Date()
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "dd"
+//
+//                let endDate = dateFormatter.string(from: detail.dueDateNew!)                days.setProgress(<#T##progress: Float##Float#>, animated: <#T##Bool#>)
+//            }
         }
         
         retrieveTaskData()
@@ -253,7 +262,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 try context.save()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                // fatalError() causes the application to generate a crash log and term inate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
@@ -292,7 +301,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.taskName.text = taskName
        // cell.progressLbl.text = "Progress - \(String(stringInterpolationSegment: progress!))"
-        cell.progressBar.setProgress(Float(progress!), animated: true)
+        cell.progressBar.setProgress(Float(progress!/100), animated: true)
         //        cell.Percentage.text = String(progress!)
 //        cell.taskNotes.text = notes
         //cell.progress.progress = Float(progress!/100)
